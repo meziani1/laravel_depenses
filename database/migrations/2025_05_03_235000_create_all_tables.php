@@ -12,47 +12,52 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Drop existing tables if they exist
-        DB::statement('DROP TABLE IF EXISTS sessions');
-        DB::statement('DROP TABLE IF EXISTS password_reset_tokens');
-        DB::statement('DROP TABLE IF EXISTS depenses');
-        DB::statement('DROP TABLE IF EXISTS salaires');
+        // Drop and recreate sessions table
+        try {
+            DB::statement('DROP TABLE IF EXISTS sessions');
+            Schema::create('sessions', function (Blueprint $table) {
+                $table->string('id')->primary();
+                $table->foreignId('user_id')->nullable()->index();
+                $table->string('ip_address', 45)->nullable();
+                $table->text('user_agent')->nullable();
+                $table->longText('payload');
+                $table->integer('last_activity')->index();
+            });
+        } catch (\Exception $e) {
+            // If sessions table already exists, skip it
+        }
 
-        // Create sessions table
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
-        });
+        // Create password reset tokens table if it doesn't exist
+        if (!Schema::hasTable('password_reset_tokens')) {
+            Schema::create('password_reset_tokens', function (Blueprint $table) {
+                $table->string('email')->primary();
+                $table->string('token');
+                $table->timestamp('created_at')->nullable();
+            });
+        }
 
-        // Create password reset tokens table
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
+        // Create depenses table if it doesn't exist
+        if (!Schema::hasTable('depenses')) {
+            Schema::create('depenses', function (Blueprint $table) {
+                $table->id();
+                $table->string('description');
+                $table->decimal('montant', 10, 2);
+                $table->date('date_depense');
+                $table->string('categorie');
+                $table->timestamps();
+            });
+        }
 
-        // Create depenses table
-        Schema::create('depenses', function (Blueprint $table) {
-            $table->id();
-            $table->string('description');
-            $table->decimal('montant', 10, 2);
-            $table->date('date_depense');
-            $table->string('categorie');
-            $table->timestamps();
-        });
-
-        // Create salaires table
-        Schema::create('salaires', function (Blueprint $table) {
-            $table->id();
-            $table->string('description');
-            $table->decimal('montant', 10, 2);
-            $table->date('date_salaire');
-            $table->timestamps();
-        });
+        // Create salaires table if it doesn't exist
+        if (!Schema::hasTable('salaires')) {
+            Schema::create('salaires', function (Blueprint $table) {
+                $table->id();
+                $table->string('description');
+                $table->decimal('montant', 10, 2);
+                $table->date('date_salaire');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
