@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('admin.dashboard');
+        if (auth()->user()->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        // Pour les utilisateurs normaux, rediriger vers la liste des salaires
+        return redirect()->route('salaires.index');
     }
 }

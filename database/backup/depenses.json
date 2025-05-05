@@ -1,0 +1,65 @@
+[
+    {
+        "id_depense": 2,
+        "libelle": "RETRAIT",
+        "date": "2025-05-01 08:50:00",
+        "user_id": 1,
+        "montant": "1000",
+        "updated_at": "2025-05-02T07:50:39.000000Z",
+        "created_at": "2025-05-02T07:50:39.000000Z"
+    },
+    {
+        "id_depense": 3,
+        "libelle": "PERE-MERE",
+        "date": "2025-05-01 08:51:00",
+        "user_id": 1,
+        "montant": "2300",
+        "updated_at": "2025-05-02T07:51:19.000000Z",
+        "created_at": "2025-05-02T07:51:19.000000Z"
+    },
+    {
+        "id_depense": 4,
+        "libelle": "SORTIE FAMILLE + QUELQUES DEPENSES",
+        "date": "2025-05-01 19:00:00",
+        "user_id": 1,
+        "montant": "200",
+        "updated_at": "2025-05-02T07:52:24.000000Z",
+        "created_at": "2025-05-02T07:52:24.000000Z"
+    },
+    {
+        "id_depense": 5,
+        "libelle": "LOYER + EAU ELECTRCITE",
+        "date": "2025-05-01 00:00:00",
+        "user_id": 1,
+        "montant": "3244",
+        "updated_at": "2025-05-02T07:54:19.000000Z",
+        "created_at": "2025-05-02T07:53:46.000000Z"
+    },
+    {
+        "id_depense": 6,
+        "libelle": "RETRAIT",
+        "date": "2025-05-04 16:27:00",
+        "user_id": 1,
+        "montant": "500",
+        "updated_at": "2025-05-04T15:28:02.000000Z",
+        "created_at": "2025-05-04T15:28:02.000000Z"
+    },
+    {
+        "id_depense": 7,
+        "libelle": "KAZYON",
+        "date": "2025-05-03 16:28:00",
+        "user_id": 1,
+        "montant": "105",
+        "updated_at": "2025-05-04T15:28:42.000000Z",
+        "created_at": "2025-05-04T15:28:42.000000Z"
+    },
+    {
+        "id_depense": 8,
+        "libelle": "ABONNEMENT INWI",
+        "date": "2025-05-04 16:50:00",
+        "user_id": 1,
+        "montant": "59",
+        "updated_at": "2025-05-04T15:50:51.000000Z",
+        "created_at": "2025-05-04T15:50:51.000000Z"
+    }
+]

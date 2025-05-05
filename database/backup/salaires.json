@@ -1,0 +1,18 @@
+[
+    {
+        "id_salaire": 6,
+        "montant": "11250.00",
+        "date_credit": "2025-04-30",
+        "user_id": 2,
+        "updated_at": "2025-05-02T07:44:23.000000Z",
+        "created_at": "2025-05-02T07:44:23.000000Z"
+    },
+    {
+        "id_salaire": 7,
+        "montant": "11250.00",
+        "date_credit": "2025-05-01",
+        "user_id": 1,
+        "updated_at": "2025-05-02T07:49:52.000000Z",
+        "created_at": "2025-05-02T07:49:52.000000Z"
+    }
+]

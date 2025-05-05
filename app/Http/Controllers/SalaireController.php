@@ -13,10 +13,16 @@ class SalaireController extends Controller
      */
     public function index()
     {
-        $salaires = Salaire::where('user_id', auth()->id())
-            ->with('user')
-            ->orderBy('date_credit', 'desc')
-            ->get();
+        if (auth()->user()->hasRole('admin')) {
+            $salaires = Salaire::with('user')
+                ->orderBy('date_credit', 'desc')
+                ->get();
+        } else {
+            $salaires = Salaire::where('user_id', auth()->id())
+                ->with('user')
+                ->orderBy('date_credit', 'desc')
+                ->get();
+        }
         return view('salaires.index', compact('salaires'));
     }
 
@@ -42,15 +48,15 @@ class SalaireController extends Controller
         $salaire->date_credit = $validated['date_credit'];
         $salaire->user_id = Auth::id();
         $salaire->save();
-        return redirect()->route('admin.dashboard')->with('success', 'Salaire ajouté avec succès.');
+        return redirect()->route('salaires.index')->with('success', 'Salaire ajouté avec succès.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Salaire $salaire)
     {
-        //
+        return view('salaires.show', compact('salaire'));
     }
 
     /**
@@ -64,26 +70,24 @@ class SalaireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id_salaire)
+    public function update(Request $request, Salaire $salaire)
     {
         $validated = $request->validate([
             'montant' => 'required|numeric|min:0',
             'date_credit' => 'required|date',
         ]);
 
-        $salaire = Salaire::findOrFail($id_salaire);
         $salaire->update($validated);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Salaire mis à jour avec succès.');
+        return redirect()->route('salaires.index')->with('success', 'Salaire mis à jour avec succès.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_salaire)
+    public function destroy(Salaire $salaire)
     {
-        $salaire = Salaire::findOrFail($id_salaire);
         $salaire->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Salaire supprimé avec succès.');
+        return redirect()->route('salaires.index')->with('success', 'Salaire supprimé avec succès.');
     }
 }

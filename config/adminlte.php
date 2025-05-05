@@ -153,10 +153,11 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
+    'layout_sidebar_collapse' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -195,8 +196,8 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
-    'classes_sidebar_nav' => '',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-4 sidebar-no-expand',
+    'classes_sidebar_nav' => 'nav-sidebar nav-flat nav-child-indent nav-compact',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
@@ -213,7 +214,7 @@ return [
     |
     */
 
-    'sidebar_mini' => 'lg',
+    'sidebar_mini' => false,
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
@@ -302,38 +303,25 @@ return [
             'text' => 'Dashboard',
             'route'  => 'admin.dashboard',
             'icon' => 'fas fa-tachometer-alt',
+            'can'  => 'view_dashboard',
+        ],
+        [
+            'text' => 'Gestion des Rôles',
+            'route'  => 'roles-permissions.index',
+            'icon' => 'fas fa-user-shield',
+            'can'  => 'view_roles',
         ],
         [
             'text' => 'Salaires',
+            'route'  => 'salaires.index',
             'icon' => 'fas fa-money-bill-wave',
-            'submenu' => [
-                [
-                    'text' => 'Ajouter un salaire',
-                    'route' => 'salaires.create',
-                    'icon' => 'fas fa-plus',
-                ],
-                [
-                    'text' => 'Liste des salaires',
-                    'route' => 'salaires.index',
-                    'icon' => 'fas fa-list',
-                ],
-            ],
+            'can'  => 'view_salaires',
         ],
         [
             'text' => 'Dépenses',
+            'route'  => 'depenses.index',
             'icon' => 'fas fa-receipt',
-            'submenu' => [
-                [
-                    'text' => 'Ajouter une dépense',
-                    'route' => 'depenses.create',
-                    'icon' => 'fas fa-plus',
-                ],
-                [
-                    'text' => 'Liste des dépenses',
-                    'route' => 'depenses.index',
-                    'icon' => 'fas fa-list',
-                ],
-            ],
+            'can'  => 'view_depenses',
         ],
     ],
 
@@ -538,6 +526,7 @@ return [
         ],
         'css' => [
             'vendor/adminlte/dist/css/adminlte.min.css',
+            'css/custom.css',
         ],
     ],
 
@@ -546,4 +535,8 @@ return [
 
     'dist_path' => 'vendor/adminlte/dist',
     'plugins_path' => 'vendor/adminlte/plugins',
+
+    'layout' => [
+        'sidebar_collapse' => false,
+    ],
 ];

@@ -1,0 +1,35 @@
+.main-sidebar, .main-sidebar::before {
+  transition: none !important;
+  width: 250px !important;
+  margin-left: 0 !important;
+}
+
+.sidebar-collapse .main-sidebar, .sidebar-collapse .main-sidebar::before {
+  margin-left: 0 !important;
+}
+
+@media (max-width: 767.98px) {
+  .main-sidebar, .main-sidebar::before {
+    margin-left: 0 !important;
+  }
+}
+
+body:not(.layout-fixed) .main-sidebar {
+  height: inherit;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0 !important;
+}
+
+body {
+  padding-left: 250px !important;
+}
+
+.content-wrapper, .main-header, .main-footer {
+  margin-left: 250px !important;
+}
+
+.sidebar-mini .content-wrapper, .sidebar-mini .main-header, .sidebar-mini .main-footer {
+  margin-left: 250px !important;
+} 

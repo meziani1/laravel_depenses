@@ -10,6 +10,7 @@ class Salaire extends Model
     protected $primaryKey = 'id_salaire';
     public $incrementing = true;
     protected $fillable = ['montant', 'date_credit', 'user_id'];
+    protected $dates = ['date_credit'];
 
     public function user()
     {
